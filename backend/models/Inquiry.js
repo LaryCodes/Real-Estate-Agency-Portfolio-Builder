@@ -1,4 +1,4 @@
-﻿const mongoose = require("mongoose");
+﻿import mongoose from "mongoose";
 
 const inquirySchema = new mongoose.Schema(
   {
@@ -26,7 +26,7 @@ const inquirySchema = new mongoose.Schema(
     propertyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Property",
-      default: null, // null = general contact inquiry
+      default: null,
     },
     status: {
       type: String,
@@ -37,4 +37,5 @@ const inquirySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Inquiry", inquirySchema);
+const Inquiry = mongoose.model("Inquiry", inquirySchema);
+export default Inquiry;

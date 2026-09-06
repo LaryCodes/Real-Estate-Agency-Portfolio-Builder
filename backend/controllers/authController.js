@@ -1,5 +1,5 @@
-﻿const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+﻿import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 const generateToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -81,4 +81,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+export { signup, login };
