@@ -1,12 +1,25 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, FocusEvent } from 'react';
 import { ContactFormData } from '@/types/property';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 interface ContactFormProps {
   propertyId?: string;
   propertyTitle?: string;
 }
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+}
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Accepts formats like +1 (555) 123-4567, 555-123-4567, 03001234567, +923001234567
+const PHONE_REGEX = /^\+?[\d\s()-]{7,20}$/;
 
 const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -17,31 +30,101 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
     propertyId: propertyId || undefined,
   });
 
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const validateField = (fieldName: keyof FormErrors, value: string): string => {
+    switch (fieldName) {
+      case 'name':
+        if (!value.trim()) return 'Name is required.';
+        if (value.trim().length < 2) return 'Name must be at least 2 characters.';
+        return '';
+      case 'email':
+        if (!value.trim()) return 'Email is required.';
+        if (!EMAIL_REGEX.test(value.trim())) return 'Enter a valid email address.';
+        return '';
+      case 'phone':
+        if (!value.trim()) return 'Phone number is required.';
+        if (!PHONE_REGEX.test(value.trim())) return 'Enter a valid phone number.';
+        return '';
+      case 'message':
+        if (!value.trim()) return 'Please tell us about your requirements.';
+        if (value.trim().length < 10) return 'Message must be at least 10 characters.';
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    // Clear the error for this field as soon as the user edits it
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+    setSubmitStatus('idle');
+    setErrorMessage('');
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    const error = validateField(name as keyof FormErrors, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const newErrors: FormErrors = {
+      name: validateField('name', formData.name),
+      email: validateField('email', formData.email),
+      phone: validateField('phone', formData.phone),
+      message: validateField('message', formData.message),
+    };
+
+    setErrors(newErrors);
+
+    const hasErrors = Object.values(newErrors).some((err) => err);
+    if (hasErrors) {
+      setSubmitStatus('error');
+      setErrorMessage('Please fix the highlighted fields below.');
+      return;
+    }
+
     setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
 
-    // Simulate form submission
-    // Backend API integration will be added later
-    // Form validation will be enhanced later
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch(`${API_URL}/inquiries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          message: formData.message.trim(),
+          // Local demo IDs are not MongoDB ObjectIds and cannot be populated by the API.
+          propertyId: /^[a-f\d]{24}$/i.test(formData.propertyId || '')
+            ? formData.propertyId
+            : undefined,
+        }),
+      });
 
-      console.log('Form submitted:', formData);
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Unable to send your message.');
+      }
+
       setSubmitStatus('success');
-      
-      // Reset form after successful submission
       setFormData({
         name: '',
         email: '',
@@ -49,18 +132,22 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
         message: '',
         propertyId: propertyId || undefined,
       });
+      setErrors({});
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'Unable to send your message. Please try again.'
+      );
     } finally {
       setIsSubmitting(false);
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus('idle'), 3000);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       {propertyTitle && (
         <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
           <p className="text-sm text-secondary-600">Inquiry about:</p>
@@ -79,10 +166,13 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          required
-          className="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+          onBlur={handleBlur}
+          autoComplete="name"
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.name ? 'border-red-400' : 'border-secondary-300'
+            }`}
           placeholder="John Doe"
         />
+        {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
       </div>
 
       {/* Email Field */}
@@ -96,16 +186,19 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          required
-          className="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+          onBlur={handleBlur}
+          autoComplete="email"
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.email ? 'border-red-400' : 'border-secondary-300'
+            }`}
           placeholder="john@example.com"
         />
+        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
       </div>
 
       {/* Phone Field */}
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-secondary-700 mb-2">
-          Phone Number
+          Phone Number *
         </label>
         <input
           type="tel"
@@ -113,9 +206,13 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+          onBlur={handleBlur}
+          autoComplete="tel"
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.phone ? 'border-red-400' : 'border-secondary-300'
+            }`}
           placeholder="+1 (555) 123-4567"
         />
+        {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
       </div>
 
       {/* Message Field */}
@@ -128,11 +225,13 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           name="message"
           value={formData.message}
           onChange={handleChange}
-          required
+          onBlur={handleBlur}
           rows={5}
-          className="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none ${errors.message ? 'border-red-400' : 'border-secondary-300'
+            }`}
           placeholder="Tell us about your requirements..."
         />
+        {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
       </div>
 
       {/* Submit Button */}
@@ -152,8 +251,8 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
       )}
 
       {submitStatus === 'error' && (
-        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
-          Oops! Something went wrong. Please try again later.
+        <div role="alert" className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+          {errorMessage || 'Oops! Something went wrong. Please try again.'}
         </div>
       )}
 
