@@ -1,12 +1,12 @@
-﻿const express = require("express");
-const {
+﻿import express from "express";
+import {
   getProperties,
   getPropertyById,
   createProperty,
   updateProperty,
   deleteProperty,
-} = require("../controllers/propertyController");
-const { protect, adminOnly } = require("../middleware/authMiddleware");
+} from "../controllers/propertyController.js";
+import { protect, adminOnly } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -16,4 +16,4 @@ router.post("/", protect, adminOnly, createProperty);
 router.put("/:id", protect, adminOnly, updateProperty);
 router.delete("/:id", protect, adminOnly, deleteProperty);
 
-module.exports = router;
+export default router;

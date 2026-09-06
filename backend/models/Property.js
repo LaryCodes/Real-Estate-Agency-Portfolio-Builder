@@ -1,4 +1,4 @@
-﻿const mongoose = require("mongoose");
+﻿import mongoose from "mongoose";
 
 const propertySchema = new mongoose.Schema(
   {
@@ -52,7 +52,7 @@ const propertySchema = new mongoose.Schema(
       min: 0,
     },
     image: {
-      type: String, // primary/thumbnail image
+      type: String,
       default: "",
     },
     images: {
@@ -79,7 +79,7 @@ const propertySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Text index for search
 propertySchema.index({ title: "text", description: "text", location: "text" });
 
-module.exports = mongoose.model("Property", propertySchema);
+const Property = mongoose.model("Property", propertySchema);
+export default Property;
