@@ -28,6 +28,11 @@ export const createInquiry = async (req, res) => {
       const messages = Object.values(error.errors).map((e) => e.message);
       return res.status(400).json({ message: messages.join(", ") });
     }
+    // Fix: an invalid propertyId (not a valid ObjectId) throws CastError,
+    // not ValidationError — without this it would fall through to a 500.
+    if (error.name === "CastError") {
+      return res.status(400).json({ message: "Invalid property ID" });
+    }
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
@@ -64,3 +69,5 @@ export const getInquiries = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export { createInquiry, getInquiries };
