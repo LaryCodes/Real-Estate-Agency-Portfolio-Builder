@@ -1,4 +1,4 @@
-﻿const Inquiry = require("../models/Inquiry");
+﻿import Inquiry from "../models/Inquiry.js";
 
 // POST /api/inquiries
 const createInquiry = async (req, res) => {
@@ -27,6 +27,11 @@ const createInquiry = async (req, res) => {
     if (error.name === "ValidationError") {
       const messages = Object.values(error.errors).map((e) => e.message);
       return res.status(400).json({ message: messages.join(", ") });
+    }
+    // Fix: an invalid propertyId (not a valid ObjectId) throws CastError,
+    // not ValidationError — without this it would fall through to a 500.
+    if (error.name === "CastError") {
+      return res.status(400).json({ message: "Invalid property ID" });
     }
     res.status(500).json({ message: "Server error", error: error.message });
   }
@@ -65,4 +70,4 @@ const getInquiries = async (req, res) => {
   }
 };
 
-module.exports = { createInquiry, getInquiries };
+export { createInquiry, getInquiries };
