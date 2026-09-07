@@ -1,4 +1,4 @@
-﻿const Property = require("../models/Property");
+﻿import Property from "../models/Property.js";
 
 // GET /api/properties
 const getProperties = async (req, res) => {
@@ -98,7 +98,7 @@ const deleteProperty = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getProperties,
   getPropertyById,
   createProperty,
