@@ -65,7 +65,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-secondary-50">
+    <div className="min-h-screen bg-zinc-50">
       {/* Hero Section */}
       <section className="bg-primary-600 text-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,10 +92,10 @@ export default function ContactPage() {
                 <div className="bg-primary-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary-600">
                   {info.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-secondary-900 mb-4">
+                <h3 className="text-xl font-semibold text-zinc-900 mb-4">
                   {info.title}
                 </h3>
-                <div className="space-y-1 text-secondary-600">
+                <div className="space-y-1 text-zinc-600">
                   {info.details.map((detail, idx) => (
                     <p key={idx}>{detail}</p>
                   ))}
@@ -112,10 +112,10 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left Column - Form */}
             <div className="bg-white rounded-xl shadow-md p-8 md:p-10">
-              <h2 className="text-3xl font-bold text-secondary-900 mb-6">
+              <h2 className="text-3xl font-bold text-zinc-900 mb-6">
                 Send Us a Message
               </h2>
-              <p className="text-secondary-600 mb-8">
+              <p className="text-zinc-600 mb-8">
                 Fill out the form below and our team will get back to you within 24 hours.
               </p>
               <ContactForm />
@@ -124,10 +124,10 @@ export default function ContactPage() {
             {/* Right Column - Additional Info */}
             <div className="space-y-6">
               <div>
-                <h2 className="text-3xl font-bold text-secondary-900 mb-6">
+                <h2 className="text-3xl font-bold text-zinc-900 mb-6">
                   Contact by Department
                 </h2>
-                <p className="text-secondary-600 mb-8">
+                <p className="text-zinc-600 mb-8">
                   Reach out to the right department for faster assistance
                 </p>
               </div>
@@ -138,14 +138,14 @@ export default function ContactPage() {
                     key={index}
                     className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <h3 className="text-lg font-semibold text-secondary-900 mb-2">
+                    <h3 className="text-lg font-semibold text-zinc-900 mb-2">
                       {dept.title}
                     </h3>
-                    <p className="text-secondary-600 text-sm mb-4">
+                    <p className="text-zinc-600 text-sm mb-4">
                       {dept.description}
                     </p>
                     <div className="space-y-2 text-sm">
-                      <div className="flex items-center text-secondary-700">
+                      <div className="flex items-center text-zinc-700">
                         <svg
                           className="w-4 h-4 mr-2 text-primary-600"
                           fill="none"
@@ -164,7 +164,7 @@ export default function ContactPage() {
                           {dept.email}
                         </a>
                       </div>
-                      <div className="flex items-center text-secondary-700">
+                      <div className="flex items-center text-zinc-700">
                         <svg
                           className="w-4 h-4 mr-2 text-primary-600"
                           fill="none"
@@ -197,20 +197,20 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-secondary-900 mb-4">
+              <h2 className="text-3xl font-bold text-zinc-900 mb-4">
                 Office Hours
               </h2>
-              <p className="text-secondary-600">
+              <p className="text-zinc-600">
                 We&apos;re here to serve you during these hours
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-secondary-50 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-secondary-900 mb-4">
+              <div className="bg-zinc-50 rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-zinc-900 mb-4">
                   Regular Business Hours
                 </h3>
-                <div className="space-y-2 text-secondary-700">
+                <div className="space-y-2 text-zinc-700">
                   <div className="flex justify-between">
                     <span>Monday - Friday</span>
                     <span className="font-medium">9:00 AM - 6:00 PM</span>
@@ -227,13 +227,13 @@ export default function ContactPage() {
               </div>
 
               <div className="bg-primary-50 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-secondary-900 mb-4">
+                <h3 className="text-lg font-semibold text-zinc-900 mb-4">
                   Emergency Support
                 </h3>
-                <p className="text-secondary-700 mb-4">
+                <p className="text-zinc-700 mb-4">
                   For urgent property matters and emergencies, our on-call team is available:
                 </p>
-                <div className="text-secondary-700">
+                <div className="text-zinc-700">
                   <div className="flex justify-between">
                     <span>24/7 Emergency Line</span>
                     <span className="font-medium">+1 (555) 911-HELP</span>
@@ -249,7 +249,7 @@ export default function ContactPage() {
       <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="bg-secondary-100 h-96 flex items-center justify-center">
+            <div className="bg-zinc-100 h-96 flex items-center justify-center">
               <div className="text-center">
                 <svg
                   className="w-20 h-20 text-secondary-400 mx-auto mb-4"
@@ -263,10 +263,10 @@ export default function ContactPage() {
                   <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <p className="text-secondary-600 text-lg">
+                <p className="text-zinc-600 text-lg">
                   Map integration placeholder
                 </p>
-                <p className="text-secondary-500 text-sm mt-2">
+                <p className="text-zinc-500 text-sm mt-2">
                   Google Maps or similar will be integrated here
                 </p>
               </div>
@@ -290,3 +290,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

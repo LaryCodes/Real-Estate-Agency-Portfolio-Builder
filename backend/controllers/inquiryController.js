@@ -1,7 +1,7 @@
-﻿const Inquiry = require("../models/Inquiry");
+﻿import Inquiry from "../models/Inquiry.js";
 
 // POST /api/inquiries
-const createInquiry = async (req, res) => {
+export const createInquiry = async (req, res) => {
   try {
     const { name, email, phone, message, propertyId } = req.body;
 
@@ -33,7 +33,7 @@ const createInquiry = async (req, res) => {
 };
 
 // GET /api/inquiries  (protected: admin)
-const getInquiries = async (req, res) => {
+export const getInquiries = async (req, res) => {
   try {
     const { status, page = 1, limit = 20 } = req.query;
 
@@ -64,5 +64,3 @@ const getInquiries = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
-module.exports = { createInquiry, getInquiries };

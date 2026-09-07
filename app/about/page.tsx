@@ -86,10 +86,10 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6">
                 Our Story
               </h2>
-              <div className="space-y-4 text-secondary-600 leading-relaxed">
+              <div className="space-y-4 text-zinc-600 leading-relaxed">
                 <p>
                   Founded in 2020, Elite Estates began with a simple mission: to revolutionize the real estate experience by combining expert knowledge with cutting-edge technology and personalized service.
                 </p>
@@ -109,19 +109,19 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-primary-50 rounded-xl p-8 text-center">
                 <div className="text-5xl font-bold text-primary-600 mb-2">10+</div>
-                <div className="text-secondary-700 font-medium">Years in Business</div>
+                <div className="text-zinc-700 font-medium">Years in Business</div>
               </div>
               <div className="bg-primary-50 rounded-xl p-8 text-center">
                 <div className="text-5xl font-bold text-primary-600 mb-2">1000+</div>
-                <div className="text-secondary-700 font-medium">Properties Sold</div>
+                <div className="text-zinc-700 font-medium">Properties Sold</div>
               </div>
               <div className="bg-primary-50 rounded-xl p-8 text-center">
                 <div className="text-5xl font-bold text-primary-600 mb-2">500+</div>
-                <div className="text-secondary-700 font-medium">Active Listings</div>
+                <div className="text-zinc-700 font-medium">Active Listings</div>
               </div>
               <div className="bg-primary-50 rounded-xl p-8 text-center">
                 <div className="text-5xl font-bold text-primary-600 mb-2">50+</div>
-                <div className="text-secondary-700 font-medium">Expert Agents</div>
+                <div className="text-zinc-700 font-medium">Expert Agents</div>
               </div>
             </div>
           </div>
@@ -129,13 +129,13 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16 md:py-20 bg-secondary-50">
+      <section className="py-16 md:py-20 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6">
               Our Mission
             </h2>
-            <p className="text-xl text-secondary-600 leading-relaxed mb-8">
+            <p className="text-xl text-zinc-600 leading-relaxed mb-8">
               To empower our clients with expert guidance, innovative tools, and personalized service that transforms the complex process of buying, selling, or renting property into a seamless and rewarding experience.
             </p>
             <div className="bg-primary-600 text-white rounded-2xl p-8 md:p-12">
@@ -152,10 +152,10 @@ export default function AboutPage() {
       <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4">
               Our Core Values
             </h2>
-            <p className="text-secondary-600 max-w-2xl mx-auto">
+            <p className="text-zinc-600 max-w-2xl mx-auto">
               The principles that guide every decision we make and every service we provide
             </p>
           </div>
@@ -169,10 +169,10 @@ export default function AboutPage() {
                 <div className="bg-primary-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary-600">
                   {value.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-secondary-900 mb-3">
+                <h3 className="text-xl font-semibold text-zinc-900 mb-3">
                   {value.title}
                 </h3>
-                <p className="text-secondary-600">{value.description}</p>
+                <p className="text-zinc-600">{value.description}</p>
               </div>
             ))}
           </div>
@@ -180,13 +180,13 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 md:py-20 bg-secondary-50">
+      <section className="py-16 md:py-20 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4">
               Meet Our Leadership Team
             </h2>
-            <p className="text-secondary-600 max-w-2xl mx-auto">
+            <p className="text-zinc-600 max-w-2xl mx-auto">
               Experienced professionals dedicated to your success
             </p>
           </div>
@@ -212,11 +212,11 @@ export default function AboutPage() {
                   </svg>
                 </div>
                 <div className="p-6 text-center">
-                  <h3 className="text-xl font-semibold text-secondary-900 mb-1">
+                  <h3 className="text-xl font-semibold text-zinc-900 mb-1">
                     {member.name}
                   </h3>
                   <p className="text-primary-600 font-medium mb-3">{member.role}</p>
-                  <p className="text-secondary-600 text-sm">{member.description}</p>
+                  <p className="text-zinc-600 text-sm">{member.description}</p>
                 </div>
               </div>
             ))}
@@ -224,7 +224,7 @@ export default function AboutPage() {
 
           {/* Team expansion note */}
           <div className="mt-12 text-center">
-            <p className="text-secondary-600 mb-4">
+            <p className="text-zinc-600 mb-4">
               Plus 50+ dedicated agents and support staff ready to serve you
             </p>
             <Link
@@ -260,3 +260,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

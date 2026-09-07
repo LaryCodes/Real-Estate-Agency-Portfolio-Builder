@@ -56,7 +56,7 @@ export default function PropertiesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary-50">
+    <div className="min-h-screen bg-zinc-50">
       {/* Page Header */}
       <section className="bg-primary-600 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,7 +68,7 @@ export default function PropertiesPage() {
       </section>
 
       {/* Search and Filters Section */}
-      <section className="bg-white border-b border-secondary-200 sticky top-16 z-40 shadow-sm">
+      <section className="bg-white border-b border-zinc-200 sticky top-16 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Search Bar */}
           <div className="mb-6">
@@ -78,7 +78,7 @@ export default function PropertiesPage() {
                 placeholder="Search by location, property name, or keyword..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-3 pl-12 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="w-full px-6 py-3 pl-12 border border-zinc-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               />
               <svg
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-secondary-400"
@@ -98,14 +98,14 @@ export default function PropertiesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Property Type Filter */}
             <div>
-              <label htmlFor="type" className="block text-sm font-medium text-secondary-700 mb-2">
+              <label htmlFor="type" className="block text-sm font-medium text-zinc-700 mb-2">
                 Property Type
               </label>
               <select
                 id="type"
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-2 border border-zinc-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               >
                 <option value="all">All Types</option>
                 <option value="house">House</option>
@@ -117,14 +117,14 @@ export default function PropertiesPage() {
 
             {/* Status Filter */}
             <div>
-              <label htmlFor="status" className="block text-sm font-medium text-secondary-700 mb-2">
+              <label htmlFor="status" className="block text-sm font-medium text-zinc-700 mb-2">
                 Status
               </label>
               <select
                 id="status"
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="w-full px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-2 border border-zinc-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               >
                 <option value="all">All Status</option>
                 <option value="for-sale">For Sale</option>
@@ -135,14 +135,14 @@ export default function PropertiesPage() {
 
             {/* Price Range Filter */}
             <div>
-              <label htmlFor="price" className="block text-sm font-medium text-secondary-700 mb-2">
+              <label htmlFor="price" className="block text-sm font-medium text-zinc-700 mb-2">
                 Price Range
               </label>
               <select
                 id="price"
                 value={priceRange}
                 onChange={(e) => setPriceRange(e.target.value)}
-                className="w-full px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-2 border border-zinc-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               >
                 <option value="all">All Prices</option>
                 <option value="under-500k">Under $500K</option>
@@ -156,7 +156,7 @@ export default function PropertiesPage() {
             <div className="flex items-end">
               <button
                 onClick={handleReset}
-                className="w-full px-4 py-2 border border-secondary-300 text-secondary-700 rounded-lg hover:bg-secondary-50 transition-colors font-medium"
+                className="w-full px-4 py-2 border border-zinc-300 text-zinc-700 rounded-lg hover:bg-zinc-50 transition-colors font-medium"
               >
                 Reset Filters
               </button>
@@ -164,7 +164,7 @@ export default function PropertiesPage() {
           </div>
 
           {/* Results Count */}
-          <div className="mt-4 text-sm text-secondary-600">
+          <div className="mt-4 text-sm text-zinc-600">
             Showing <span className="font-semibold">{filteredProperties.length}</span> of{' '}
             <span className="font-semibold">{allProperties.length}</span> properties
           </div>
@@ -189,10 +189,10 @@ export default function PropertiesPage() {
               >
                 <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
-              <h3 className="text-2xl font-semibold text-secondary-900 mb-2">
+              <h3 className="text-2xl font-semibold text-zinc-900 mb-2">
                 No properties found
               </h3>
-              <p className="text-secondary-600 mb-6">
+              <p className="text-zinc-600 mb-6">
                 Try adjusting your filters or search query to find more results.
               </p>
               <button
@@ -220,3 +220,4 @@ export default function PropertiesPage() {
     </div>
   );
 }
+

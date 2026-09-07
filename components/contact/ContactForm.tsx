@@ -150,14 +150,14 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       {propertyTitle && (
         <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
-          <p className="text-sm text-secondary-600">Inquiry about:</p>
-          <p className="font-semibold text-secondary-900">{propertyTitle}</p>
+          <p className="text-sm text-zinc-600">Inquiry about:</p>
+          <p className="font-semibold text-zinc-900">{propertyTitle}</p>
         </div>
       )}
 
       {/* Name Field */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-secondary-700 mb-2">
+        <label htmlFor="name" className="block text-sm font-medium text-zinc-700 mb-2">
           Full Name *
         </label>
         <input
@@ -168,7 +168,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           onChange={handleChange}
           onBlur={handleBlur}
           autoComplete="name"
-          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.name ? 'border-red-400' : 'border-secondary-300'
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.name ? 'border-red-400' : 'border-zinc-300'
             }`}
           placeholder="John Doe"
         />
@@ -177,7 +177,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
 
       {/* Email Field */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-secondary-700 mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-zinc-700 mb-2">
           Email Address *
         </label>
         <input
@@ -188,7 +188,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           onChange={handleChange}
           onBlur={handleBlur}
           autoComplete="email"
-          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.email ? 'border-red-400' : 'border-secondary-300'
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.email ? 'border-red-400' : 'border-zinc-300'
             }`}
           placeholder="john@example.com"
         />
@@ -197,7 +197,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
 
       {/* Phone Field */}
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-secondary-700 mb-2">
+        <label htmlFor="phone" className="block text-sm font-medium text-zinc-700 mb-2">
           Phone Number *
         </label>
         <input
@@ -208,7 +208,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           onChange={handleChange}
           onBlur={handleBlur}
           autoComplete="tel"
-          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.phone ? 'border-red-400' : 'border-secondary-300'
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${errors.phone ? 'border-red-400' : 'border-zinc-300'
             }`}
           placeholder="+1 (555) 123-4567"
         />
@@ -217,7 +217,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
 
       {/* Message Field */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-secondary-700 mb-2">
+        <label htmlFor="message" className="block text-sm font-medium text-zinc-700 mb-2">
           Message *
         </label>
         <textarea
@@ -227,7 +227,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
           onChange={handleChange}
           onBlur={handleBlur}
           rows={5}
-          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none ${errors.message ? 'border-red-400' : 'border-secondary-300'
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none ${errors.message ? 'border-red-400' : 'border-zinc-300'
             }`}
           placeholder="Tell us about your requirements..."
         />
@@ -257,7 +257,7 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
       )}
 
       {/* Note */}
-      <p className="text-sm text-secondary-600 text-center">
+      <p className="text-sm text-zinc-600 text-center">
         * Required fields
       </p>
     </form>
@@ -265,3 +265,4 @@ const ContactForm = ({ propertyId, propertyTitle }: ContactFormProps) => {
 };
 
 export default ContactForm;
+

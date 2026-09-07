@@ -1,7 +1,7 @@
-﻿const Property = require("../models/Property");
+﻿import Property from "../models/Property.js";
 
 // GET /api/properties
-const getProperties = async (req, res) => {
+export const getProperties = async (req, res) => {
   try {
     const { type, status, featured, search, page = 1, limit = 12 } = req.query;
 
@@ -35,7 +35,7 @@ const getProperties = async (req, res) => {
 };
 
 // GET /api/properties/:id
-const getPropertyById = async (req, res) => {
+export const getPropertyById = async (req, res) => {
   try {
     const property = await Property.findById(req.params.id);
     if (!property) {
@@ -51,7 +51,7 @@ const getPropertyById = async (req, res) => {
 };
 
 // POST /api/properties  (protected: admin)
-const createProperty = async (req, res) => {
+export const createProperty = async (req, res) => {
   try {
     const property = await Property.create(req.body);
     res.status(201).json({ message: "Property created", property });
@@ -65,7 +65,7 @@ const createProperty = async (req, res) => {
 };
 
 // PUT /api/properties/:id  (protected: admin)
-const updateProperty = async (req, res) => {
+export const updateProperty = async (req, res) => {
   try {
     const property = await Property.findByIdAndUpdate(
       req.params.id,
@@ -86,7 +86,7 @@ const updateProperty = async (req, res) => {
 };
 
 // DELETE /api/properties/:id  (protected: admin)
-const deleteProperty = async (req, res) => {
+export const deleteProperty = async (req, res) => {
   try {
     const property = await Property.findByIdAndDelete(req.params.id);
     if (!property) {
@@ -96,12 +96,4 @@ const deleteProperty = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
-};
-
-module.exports = {
-  getProperties,
-  getPropertyById,
-  createProperty,
-  updateProperty,
-  deleteProperty,
 };

@@ -4,12 +4,101 @@
 
 @layer base {
   body {
-    @apply bg-white text-secondary-900;
+    @apply bg-zinc-50 text-zinc-900;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/40 border border-white/10;
+  }
+  
+  .btn-premium {
+    @apply relative overflow-hidden text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105;
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  }
+  
+  .btn-premium:hover {
+    box-shadow: 0 20px 60px rgba(236, 72, 153, 0.4);
+  }
+  
+  .btn-outline-premium {
+    @apply relative border-2 border-primary-500 text-primary-500 font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:bg-primary-500 hover:text-white;
+  }
+  
+  .btn-outline-premium:hover {
+    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
+  }
+  
+  .card-premium {
+    @apply bg-white backdrop-blur-sm rounded-2xl shadow-lg transition-all duration-300 overflow-hidden;
+  }
+  
+  .card-premium:hover {
+    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #ec4899, #f97316, #be185d);
+  }
+  
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  }
+  
+  .bg-gradient-accent {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  }
+  
+  .bg-gradient-dark {
+    background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+  }
+  
+  .bg-gradient-premium {
+    background: linear-gradient(135deg, #ec4899 0%, #f97316 50%, #be185d 100%);
+  }
+  
+  .shadow-premium {
+    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
+  }
+  
+  .shadow-premium-lg {
+    box-shadow: 0 20px 60px rgba(236, 72, 153, 0.4);
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .delay-700 {
+    animation-delay: 700ms;
   }
 }

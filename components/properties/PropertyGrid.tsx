@@ -11,7 +11,7 @@ const PropertyGrid = ({ properties, title, description }: PropertyGridProps) => 
   if (properties.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-secondary-600 text-lg">No properties found.</p>
+        <p className="text-zinc-600 text-lg">No properties found.</p>
       </div>
     );
   }
@@ -22,12 +22,12 @@ const PropertyGrid = ({ properties, title, description }: PropertyGridProps) => 
       {(title || description) && (
         <div className="mb-8 text-center">
           {title && (
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4">
               {title}
             </h2>
           )}
           {description && (
-            <p className="text-secondary-600 max-w-2xl mx-auto">
+            <p className="text-zinc-600 max-w-2xl mx-auto">
               {description}
             </p>
           )}
@@ -45,3 +45,4 @@ const PropertyGrid = ({ properties, title, description }: PropertyGridProps) => 
 };
 
 export default PropertyGrid;
+

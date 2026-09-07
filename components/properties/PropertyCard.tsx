@@ -11,113 +11,147 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
   return (
     <Link
       href={`/properties/${property.id}`}
-      className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      className="group relative block"
     >
-      {/* Property Image */}
-      <div className="relative h-64 overflow-hidden">
-        <Image
-          src={property.images[0]}
-          alt={property.title}
-          fill
-          className="object-cover group-hover:scale-110 transition-transform duration-300"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        {/* Status Badge */}
-        <div className="absolute top-4 left-4">
-          <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase">
-            {property.status === 'for-sale' ? 'For Sale' : property.status === 'for-rent' ? 'For Rent' : 'Sold'}
-          </span>
-        </div>
-        {/* Featured Badge */}
-        {property.featured && (
-          <div className="absolute top-4 right-4">
-            <span className="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase">
-              Featured
+      {/* Glow effect on hover */}
+      <div className="absolute -inset-0.5 bg-gradient-primary rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+      
+      <div className="relative card-premium">
+        {/* Property Image */}
+        <div className="relative h-72 overflow-hidden rounded-t-2xl">
+          <Image
+            src={property.images[0]}
+            alt={property.title}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          {/* Status Badge */}
+          <div className="absolute top-4 left-4">
+            <span className="glass-dark px-4 py-2 rounded-full text-xs font-bold uppercase text-white border border-white/20">
+              {property.status === 'for-sale' ? 'For Sale' : property.status === 'for-rent' ? 'For Rent' : 'Sold'}
             </span>
           </div>
-        )}
-      </div>
+          
+          {/* Featured Badge */}
+          {property.featured && (
+            <div className="absolute top-4 right-4">
+              <span className="bg-gradient-accent px-4 py-2 rounded-full text-xs font-bold uppercase text-white shadow-lg">
+                ⭐ Featured
+              </span>
+            </div>
+          )}
 
-      {/* Property Details */}
-      <div className="p-6">
-        {/* Price */}
-        <div className="mb-2">
-          <span className="text-2xl font-bold text-primary-600">
-            {formatPrice(property.price)}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-xl font-semibold text-secondary-900 mb-2 group-hover:text-primary-600 transition-colors line-clamp-1">
-          {property.title}
-        </h3>
-
-        {/* Location */}
-        <div className="flex items-center text-secondary-600 mb-4">
-          <svg
-            className="w-4 h-4 mr-1"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span className="text-sm">{property.location}</span>
-        </div>
-
-        {/* Property Features */}
-        <div className="flex items-center justify-between text-secondary-600 border-t border-secondary-200 pt-4">
-          <div className="flex items-center space-x-4">
-            {/* Bedrooms */}
-            <div className="flex items-center">
-              <svg
-                className="w-5 h-5 mr-1"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          {/* Quick View Button - appears on hover */}
+          <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button className="glass-dark p-3 rounded-xl hover:bg-white/20 transition-colors border border-white/20">
+              <svg className="w-5 h-5 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
-              <span className="text-sm">{property.bedrooms} Beds</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Property Details */}
+        <div className="p-6 space-y-4">
+          {/* Price */}
+          <div className="flex items-start justify-between">
+            <span className="text-3xl font-bold gradient-text">
+              {formatPrice(property.price)}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h3 className="text-xl font-bold text-zinc-900 group-hover:text-primary-600 transition-colors line-clamp-1">
+            {property.title}
+          </h3>
+
+          {/* Location */}
+          <div className="flex items-center text-zinc-600">
+            <svg
+              className="w-5 h-5 mr-2 text-primary-500 flex-shrink-0"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span className="text-sm truncate">{property.location}</span>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent"></div>
+
+          {/* Property Features */}
+          <div className="grid grid-cols-3 gap-4">
+            {/* Bedrooms */}
+            <div className="text-center">
+              <div className="flex items-center justify-center w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100">
+                <svg
+                  className="w-5 h-5 text-primary-600"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </div>
+              <p className="text-xs text-zinc-600 font-medium">{property.bedrooms} Beds</p>
             </div>
 
             {/* Bathrooms */}
-            <div className="flex items-center">
-              <svg
-                className="w-5 h-5 mr-1"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-              </svg>
-              <span className="text-sm">{property.bathrooms} Baths</span>
+            <div className="text-center">
+              <div className="flex items-center justify-center w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br from-accent-50 to-accent-100">
+                <svg
+                  className="w-5 h-5 text-accent-600"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                </svg>
+              </div>
+              <p className="text-xs text-zinc-600 font-medium">{property.bathrooms} Baths</p>
             </div>
 
             {/* Area */}
-            <div className="flex items-center">
-              <svg
-                className="w-5 h-5 mr-1"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-              </svg>
-              <span className="text-sm">{formatArea(property.area)}</span>
+            <div className="text-center">
+              <div className="flex items-center justify-center w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br from-primary-50 to-accent-100">
+                <svg
+                  className="w-5 h-5 text-primary-600"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+              </div>
+              <p className="text-xs text-zinc-600 font-medium">{formatArea(property.area)}</p>
+            </div>
+          </div>
+
+          {/* View Details Button */}
+          <div className="pt-2">
+            <div className="w-full text-center py-3 rounded-xl bg-gradient-to-r from-primary-500/10 to-accent-500/10 text-primary-600 font-semibold text-sm group-hover:from-primary-500 group-hover:to-accent-500 group-hover:text-white transition-all duration-300">
+              View Details →
             </div>
           </div>
         </div>
@@ -127,3 +161,4 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
 };
 
 export default PropertyCard;
+
